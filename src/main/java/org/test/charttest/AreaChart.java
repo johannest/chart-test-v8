@@ -1,7 +1,6 @@
 package org.test.charttest;
 
 import com.vaadin.addon.charts.Chart;
-import com.vaadin.addon.charts.model.AxisTitle;
 import com.vaadin.addon.charts.model.ChartType;
 import com.vaadin.addon.charts.model.Configuration;
 import com.vaadin.addon.charts.model.DataSeries;
@@ -11,34 +10,26 @@ import com.vaadin.addon.charts.model.Labels;
 import com.vaadin.addon.charts.model.ListSeries;
 import com.vaadin.addon.charts.model.Marker;
 import com.vaadin.addon.charts.model.MarkerSymbolEnum;
-import com.vaadin.addon.charts.model.PlotLine;
 import com.vaadin.addon.charts.model.PlotOptionsArea;
 import com.vaadin.addon.charts.model.PlotOptionsColumn;
 import com.vaadin.addon.charts.model.States;
-import com.vaadin.addon.charts.model.Subtitle;
 import com.vaadin.addon.charts.model.Title;
 import com.vaadin.addon.charts.model.Tooltip;
 import com.vaadin.addon.charts.model.XAxis;
 import com.vaadin.addon.charts.model.YAxis;
-import com.vaadin.addon.charts.model.style.Color;
 import com.vaadin.addon.charts.model.style.SolidColor;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-public class AreaChart extends VerticalLayout {
+public class AreaChart {
 
-    public AreaChart() {
-		super();
-		setSizeFull();
-		addComponent(getChart());
-	}
-
-	public Component getChart() {
+	public static Chart getChart() {
         Chart chart = new Chart(ChartType.AREA);
 
         Configuration conf = chart.getConfiguration();
 
+        chart.getConfiguration().getChart().setBackgroundColor(SolidColor.LIGHTGRAY);
+        
         conf.setTitle(new Title("Test"));
         PlotOptionsArea plotOptions = new PlotOptionsArea();
         plotOptions.setPointStart(1940);
@@ -79,16 +70,16 @@ public class AreaChart extends VerticalLayout {
         conf.addSeries(new ListSeries("USA", usaNumbers));
 
         
-PlotOptionsColumn plot = new PlotOptionsColumn();
-plot.setPointWidth(1);
-plot.setBorderColor(SolidColor.GRAY);
-plot.setColor(SolidColor.GRAY);
-DataSeries columns = new DataSeries();
-columns.setPlotOptions(plot);
-
-for (int i=0; i<usaNumbers.length; i++) {
-	columns.add(new DataSeriesItem(1940+i, usaNumbers[i]));
-}
+		PlotOptionsColumn plot = new PlotOptionsColumn();
+		plot.setPointWidth(1);
+		plot.setBorderColor(SolidColor.GRAY);
+		plot.setColor(SolidColor.GRAY);
+		DataSeries columns = new DataSeries();
+		columns.setPlotOptions(plot);
+		
+		for (int i=0; i<usaNumbers.length; i++) {
+			columns.add(new DataSeriesItem(1940+i, usaNumbers[i]));
+		}
         
         
 		conf.addSeries(columns);
