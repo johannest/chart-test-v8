@@ -21,6 +21,10 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 /**
  * This UI is the application entry point. A UI may either represent a browser
  * window (or tab) or some part of an HTML page where a Vaadin application is
@@ -52,10 +56,13 @@ public class MyUI extends UI {
 		
 		Chart chart3 = AreaChart.getChart();
 		tabSheet.addTab(chart3,"Area with columns");
+
+		Chart chart4 = Chart3D.getChart();
+		tabSheet.addTab(chart4,"3D chart");
 		
-		tabSheet.addTab(RangeSelectorIssue.getChartLayout(), "RangeSelector issue");
-		tabSheet.addTab(VaadinTreeTest.getTestLayout(), "Tree test");
-		
+//		tabSheet.addTab(RangeSelectorIssue.getChartLayout(), "RangeSelector issue");
+//		tabSheet.addTab(VaadinTreeTest.getTestLayout(), "Tree test");
+//
 		layout.addComponents(tabSheet);
 		
 		Button b = new Button("open window");
@@ -69,6 +76,22 @@ public class MyUI extends UI {
 			w.focus();
 		});
 		layout.addComponent(b);
+
+		List<String> allItems = new ArrayList<>();
+
+		ComboBox<String> cb = new ComboBox<>();
+		ComboBox.NewItemProvider<String> itemHandler = newItem -> {
+			System.out.println("#### "+newItem);
+			if (!allItems.contains(newItem)) {
+				allItems.add(newItem);
+				cb.setItems(allItems);
+				cb.setSelectedItem(newItem);
+			}
+			return Optional.ofNullable(newItem);
+		};
+		cb.setNewItemProvider(itemHandler);
+
+		layout.addComponent(cb);
 		
 		setContent(layout);
 	}

@@ -1,6 +1,8 @@
 package org.test.charttest;
 
 import com.vaadin.addon.charts.Chart;
+import com.vaadin.addon.charts.PointClickEvent;
+import com.vaadin.addon.charts.PointClickListener;
 import com.vaadin.addon.charts.model.AxisTitle;
 import com.vaadin.addon.charts.model.ChartType;
 import com.vaadin.addon.charts.model.Configuration;
@@ -58,7 +60,14 @@ public class AnotherChart {
 		legend.setBorderWidth(1);
 		legend.setEnabled(false);
 		conf.setLegend(legend);
-		
+
+		chart.addPointClickListener(new PointClickListener() {
+			@Override
+			public void onClick(PointClickEvent pointClickEvent) {
+				System.out.println("zzz: "+pointClickEvent.getButton().getName());
+			}
+		});
+
 		PlotOptionsArea plotOptions = new PlotOptionsArea();
 		plotOptions.setFillOpacity(0.5);
 		plotOptions.setColor(SolidColor.LIGHTGRAY);
