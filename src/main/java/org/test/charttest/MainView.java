@@ -29,8 +29,11 @@ public class MainView extends Div implements PageConfigurator {
 //		add(tabSheet);
 
 		setSizeFull();
-		Chart chart4 = Chart3D.getChart();
-		add(chart4);
+//		Chart chart4 = Chart3D.getChart();
+//		add(chart4);
+		PhoneNumberForm phoneNumberForm = new PhoneNumberForm();
+		phoneNumberForm.setSizeFull();
+		add(phoneNumberForm);
 	}
 
 	@Override
